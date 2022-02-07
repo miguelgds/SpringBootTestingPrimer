@@ -14,7 +14,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
  * With "webEnvironment" parameter, the Spring test open a real random port. The default value is mock.
  */
 @SpringBootTest(webEnvironment = RANDOM_PORT)
-class WebEnvironmentRandomPortTest {
+class WebEnvironmentRandomPortTestIT {
 
     @LocalServerPort
     private Integer port;
