@@ -6,6 +6,7 @@ import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
@@ -14,6 +15,7 @@ import static org.springframework.boot.test.context.SpringBootTest.WebEnvironmen
  * With "webEnvironment" parameter, the Spring test open a real random port. The default value is mock.
  */
 @SpringBootTest(webEnvironment = RANDOM_PORT)
+@ActiveProfiles("test")
 class WebEnvironmentRandomPortTestIT {
 
     @LocalServerPort

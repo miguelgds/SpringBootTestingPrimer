@@ -2,11 +2,13 @@ package es.miguelgsi.springboottestingprimer;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 
 @Service
 @AllArgsConstructor
+@Transactional(readOnly = true)
 public class ShoppingCartService implements ShoppingCartUseCase {
 
     private final ProductRepository productRepository;
@@ -22,7 +24,8 @@ public class ShoppingCartService implements ShoppingCartUseCase {
                 .build();
     }
 
-    public void purchase(ArticleId articleId) {
-        productRepository.sale(articleId.getId());
+    @Transactional
+    public SaleId purchase(ArticleId articleId) {
+        return productRepository.sale(articleId.getId());
     }
 }
