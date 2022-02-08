@@ -39,7 +39,7 @@ class WebEnvironmentRandomPortTestIT {
 
     @Test
     void call_actuator_endpoint_should_response_with_status_200() {
-        ResponseEntity response = testRestTemplate.getForEntity(testRestTemplate.getRootUri() + "/actuator/health", Void.class);
+        ResponseEntity response = testRestTemplate.getForEntity("/actuator/health", Void.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 }
