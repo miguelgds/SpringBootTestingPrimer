@@ -22,6 +22,9 @@ public class SalesJPA {
     @Column(name = "PRODUCT_ID", nullable = false)
     private Long productId;
 
+    @Column(name = "USERNAME", nullable = false, length = 50)
+    private String username;
+
     @Column(name = "OCCURRED_AT", nullable = false)
     private LocalDateTime occurredAt;
 }

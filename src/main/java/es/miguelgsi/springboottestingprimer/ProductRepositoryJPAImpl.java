@@ -27,13 +27,14 @@ public class ProductRepositoryJPAImpl implements ProductRepository {
     }
 
     @Override
-    public SaleId sale(Long productId) {
+    public SaleId sale(Purchase purchase) {
         UUID saleId = UUID.randomUUID();
         SalesJPA newSale = new SalesJPA();
         newSale.setSaleId(saleId);
-        newSale.setProductId(productId);
-        newSale.setOccurredAt(LocalDateTime.now());
-        productJPARepository.findById(productId).ifPresentOrElse(
+        newSale.setProductId(purchase.getArticleId().getId());
+        newSale.setUsername(purchase.getUsername());
+        newSale.setOccurredAt(purchase.getOccurredAt());
+        productJPARepository.findById(purchase.getArticleId().getId()).ifPresentOrElse(
                     product -> product.getSales().add(newSale),
                     () -> {
                         throw new ResourceNotFoundException();

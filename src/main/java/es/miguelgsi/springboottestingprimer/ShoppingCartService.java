@@ -25,7 +25,7 @@ public class ShoppingCartService implements ShoppingCartUseCase {
     }
 
     @Transactional
-    public SaleId purchase(ArticleId articleId) {
-        return productRepository.sale(articleId.getId());
+    public SaleId purchase(Purchase purchase) {
+        return productRepository.sale(purchase);
     }
 }

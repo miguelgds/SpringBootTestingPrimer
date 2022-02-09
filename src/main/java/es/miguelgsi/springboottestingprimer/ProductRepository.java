@@ -4,5 +4,5 @@ import java.math.BigDecimal;
 
 public interface ProductRepository {
     BigDecimal price(Long productId, String currency);
-    SaleId sale(Long productId);
+    SaleId sale(Purchase purchase);
 }

@@ -6,7 +6,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
+import static es.miguelgsi.springboottestingprimer.Currency.DOLLAR;
 import static es.miguelgsi.springboottestingprimer.Currency.EURO;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -41,11 +43,16 @@ class ShoppingCartServiceTest {
 
     @Test
     void mockito_mock_assertion() {
-        ArticleId articleId = new ArticleId(1L);
+        Purchase purchase = Purchase.builder()
+                .articleId(new ArticleId(1L))
+                .username("username")
+                .currency(DOLLAR)
+                .occurredAt(LocalDateTime.of(2022, 2, 9, 11, 30, 30))
+                .build();
         ShoppingCartService sut = new ShoppingCartService(productRepository, discountRepository);
 
-        sut.purchase(articleId);
+        sut.purchase(purchase);
 
-        verify(productRepository).sale(articleId.getId());
+        verify(productRepository).sale(purchase);
     }
 }
