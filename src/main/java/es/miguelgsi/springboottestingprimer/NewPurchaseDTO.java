@@ -8,9 +8,9 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class NewPurchaseDTO {
-    @NotBlank
+    @NotBlank(message = "Username field is mandatory")
     @Length(min = 5, max = 50, message = "Username field must have a size between 5 and 50")
     private String username;
-    @NotNull
+    @NotNull(message = "Currency field is mandatory")
     private Currency currency;
 }

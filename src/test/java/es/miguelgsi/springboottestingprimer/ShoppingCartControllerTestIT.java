@@ -1,5 +1,6 @@
 package es.miguelgsi.springboottestingprimer;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -8,7 +9,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+
 import java.math.BigDecimal;
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -96,6 +100,47 @@ class ShoppingCartControllerTestIT {
                     .andExpect(header().string("location", "http://localhost/v1/shopping-cart/1/sales/" + saleId.getId().toString()));
 
             verify(shoppingCartUseCase).purchase(purchase);
+        }
+
+        @Test
+        void purchase_article_with_invalid_username_should_fail() throws Exception {
+            mockMvc.perform(post("/v1/shopping-cart/1/purchases")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content("{\"username\": \"usr\", \"currency\": \"DOLLAR\"}")
+                            .with(csrf()))
+                    .andExpect(status().is4xxClientError())
+                    .andExpect(result -> Assertions.assertTrue(result.getResolvedException() instanceof MethodArgumentNotValidException))
+                    .andExpect(result -> Assertions.assertTrue(result.getResolvedException().getMessage().contains("Username field must have a size between 5 and 50")));
+        }
+
+        @Test
+        void purchase_article_with_invalid_currency_should_fail() throws Exception {
+            mockMvc.perform(post("/v1/shopping-cart/1/purchases")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content("{\"username\": \"username\", \"currency\": \"PESETA\"}")
+                            .with(csrf()))
+                    .andExpect(status().is4xxClientError())
+                    .andExpect(result -> Assertions.assertTrue(result.getResolvedException().getMessage().contains("\"PESETA\": not one of the values accepted for Enum class")));
+        }
+
+        @Test
+        void purchase_article_without_username_should_fail() throws Exception {
+            mockMvc.perform(post("/v1/shopping-cart/1/purchases")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content("{\"currency\": \"DOLLAR\"}")
+                            .with(csrf()))
+                    .andExpect(status().is4xxClientError())
+                    .andExpect(result -> Assertions.assertTrue(result.getResolvedException().getMessage().contains("Username field is mandatory")));
+        }
+
+        @Test
+        void purchase_article_without_currency_should_fail() throws Exception {
+            mockMvc.perform(post("/v1/shopping-cart/1/purchases")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content("{\"username\": \"username\"}")
+                            .with(csrf()))
+                    .andExpect(status().is4xxClientError())
+                    .andExpect(result -> Assertions.assertTrue(result.getResolvedException().getMessage().contains("Currency field is mandatory")));
         }
     }
 }
