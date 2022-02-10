@@ -6,6 +6,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.net.URI;
 import java.time.Clock;
@@ -33,6 +34,7 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/v1/shopping-cart/{articleId}/purchases")
+    @RolesAllowed("ACTIVE_USER")
     public ResponseEntity<Void> purchaseArticle(@PathVariable Long articleId,
                                                 @RequestBody @Valid NewPurchaseDTO purchase) {
         SaleId saleId = shoppingCartUseCase.purchase(Purchase.builder()

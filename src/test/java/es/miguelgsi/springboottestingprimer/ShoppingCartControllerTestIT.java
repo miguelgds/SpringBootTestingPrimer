@@ -23,6 +23,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -80,8 +81,28 @@ class ShoppingCartControllerTestIT {
     @Nested
     @DisplayName("Test related with purchaseArticle use case")
     class CartControllerPurchaseArticleTest {
+
         @Test
-        void purchase_article_with_valid_data_should_create_resource() throws Exception {
+        void non_authenticated_purchase_article_should_fail() throws Exception {
+            mockMvc.perform(post("/v1/shopping-cart/1/purchases")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content("{\"username\": \"username\", \"currency\": \"DOLLAR\"}")
+                            .with(csrf()))
+                    .andExpect(status().isUnauthorized());
+        }
+
+        @Test
+        void non_active_user_purchase_article_should_fail() throws Exception {
+            mockMvc.perform(post("/v1/shopping-cart/1/purchases")
+                            .contentType(MediaType.APPLICATION_JSON)
+                            .content("{\"username\": \"username\", \"currency\": \"DOLLAR\"}")
+                            .with(csrf())
+                            .with(user("user").roles("NON_ACTIVE_USER")))
+                    .andExpect(status().isForbidden());
+        }
+
+        @Test
+        void active_user_purchase_article_with_valid_data_should_create_resource() throws Exception {
             Purchase purchase = Purchase.builder()
                     .articleId(new ArticleId(1L))
                     .username("username")
@@ -95,7 +116,8 @@ class ShoppingCartControllerTestIT {
             mockMvc.perform(post("/v1/shopping-cart/1/purchases")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"username\": \"username\", \"currency\": \"DOLLAR\"}")
-                        .with(csrf()))
+                        .with(csrf())
+                        .with(user("user").roles("ACTIVE_USER")))
                     .andExpect(status().isCreated())
                     .andExpect(header().string("location", containsString("/v1/shopping-cart/1/sales/" + saleId.getId().toString())));
 
@@ -103,11 +125,12 @@ class ShoppingCartControllerTestIT {
         }
 
         @Test
-        void purchase_article_with_invalid_username_should_fail() throws Exception {
+        void active_user_purchase_article_with_invalid_username_should_fail() throws Exception {
             mockMvc.perform(post("/v1/shopping-cart/1/purchases")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("{\"username\": \"usr\", \"currency\": \"DOLLAR\"}")
-                            .with(csrf()))
+                            .with(csrf())
+                            .with(user("user").roles("ACTIVE_USER")))
                     .andExpect(status().is4xxClientError())
                     .andExpect(result -> assertThat(result.getResolvedException())
                             .isInstanceOf(MethodArgumentNotValidException.class))
@@ -116,33 +139,36 @@ class ShoppingCartControllerTestIT {
         }
 
         @Test
-        void purchase_article_with_invalid_currency_should_fail() throws Exception {
+        void active_user_purchase_article_with_invalid_currency_should_fail() throws Exception {
             mockMvc.perform(post("/v1/shopping-cart/1/purchases")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("{\"username\": \"username\", \"currency\": \"PESETA\"}")
-                            .with(csrf()))
+                            .with(csrf())
+                            .with(user("user").roles("ACTIVE_USER")))
                     .andExpect(status().is4xxClientError())
                     .andExpect(result -> assertThat(result.getResolvedException().getMessage())
                             .contains("\"PESETA\": not one of the values accepted for Enum class"));
         }
 
         @Test
-        void purchase_article_without_username_should_fail() throws Exception {
+        void active_user_purchase_article_without_username_should_fail() throws Exception {
             mockMvc.perform(post("/v1/shopping-cart/1/purchases")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("{\"currency\": \"DOLLAR\"}")
-                            .with(csrf()))
+                            .with(csrf())
+                            .with(user("user").roles("ACTIVE_USER")))
                     .andExpect(status().is4xxClientError())
                     .andExpect(result -> assertThat(result.getResolvedException().getMessage())
                             .contains("Username field is mandatory"));
         }
 
         @Test
-        void purchase_article_without_currency_should_fail() throws Exception {
+        void active_user_purchase_article_without_currency_should_fail() throws Exception {
             mockMvc.perform(post("/v1/shopping-cart/1/purchases")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("{\"username\": \"username\"}")
-                            .with(csrf()))
+                            .with(csrf())
+                            .with(user("user").roles("ACTIVE_USER")))
                     .andExpect(status().is4xxClientError())
                     .andExpect(result -> assertThat(result.getResolvedException().getMessage())
                             .contains("Currency field is mandatory"));
