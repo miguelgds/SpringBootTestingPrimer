@@ -1,5 +1,6 @@
-package es.miguelgsi.springboottestingprimer;
+package es.miguelgsi.springboottestingprimer.infrastructure.adapters.in.rest;
 
+import es.miguelgsi.springboottestingprimer.domain.values.Currency;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 

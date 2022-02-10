@@ -1,5 +1,12 @@
 package es.miguelgsi.springboottestingprimer;
 
+import es.miguelgsi.springboottestingprimer.infrastructure.adapters.in.rest.ShoppingCartController;
+import es.miguelgsi.springboottestingprimer.domain.entities.Price;
+import es.miguelgsi.springboottestingprimer.domain.entities.Purchase;
+import es.miguelgsi.springboottestingprimer.infrastructure.adapters.in.rest.ResourceNotFoundException;
+import es.miguelgsi.springboottestingprimer.application.ports.in.ShoppingCartUseCase;
+import es.miguelgsi.springboottestingprimer.domain.values.ArticleId;
+import es.miguelgsi.springboottestingprimer.domain.values.SaleId;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -16,8 +23,8 @@ import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import static es.miguelgsi.springboottestingprimer.Currency.DOLLAR;
-import static es.miguelgsi.springboottestingprimer.Currency.EURO;
+import static es.miguelgsi.springboottestingprimer.domain.values.Currency.DOLLAR;
+import static es.miguelgsi.springboottestingprimer.domain.values.Currency.EURO;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;

@@ -1,4 +1,4 @@
-package es.miguelgsi.springboottestingprimer;
+package es.miguelgsi.springboottestingprimer.domain.values;
 
 import lombok.Value;
 

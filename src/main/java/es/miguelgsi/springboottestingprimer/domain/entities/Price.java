@@ -1,5 +1,6 @@
-package es.miguelgsi.springboottestingprimer;
+package es.miguelgsi.springboottestingprimer.domain.entities;
 
+import es.miguelgsi.springboottestingprimer.domain.values.Currency;
 import lombok.Builder;
 import lombok.Value;
 

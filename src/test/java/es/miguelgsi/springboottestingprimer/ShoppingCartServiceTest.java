@@ -1,5 +1,11 @@
 package es.miguelgsi.springboottestingprimer;
 
+import es.miguelgsi.springboottestingprimer.domain.entities.Price;
+import es.miguelgsi.springboottestingprimer.domain.entities.Purchase;
+import es.miguelgsi.springboottestingprimer.application.ports.out.DiscountRepository;
+import es.miguelgsi.springboottestingprimer.application.ports.out.ProductRepository;
+import es.miguelgsi.springboottestingprimer.application.services.ShoppingCartService;
+import es.miguelgsi.springboottestingprimer.domain.values.ArticleId;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -8,8 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import static es.miguelgsi.springboottestingprimer.Currency.DOLLAR;
-import static es.miguelgsi.springboottestingprimer.Currency.EURO;
+import static es.miguelgsi.springboottestingprimer.domain.values.Currency.DOLLAR;
+import static es.miguelgsi.springboottestingprimer.domain.values.Currency.EURO;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

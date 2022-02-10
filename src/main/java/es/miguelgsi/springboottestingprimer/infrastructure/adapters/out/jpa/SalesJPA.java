@@ -1,4 +1,4 @@
-package es.miguelgsi.springboottestingprimer;
+package es.miguelgsi.springboottestingprimer.infrastructure.adapters.out.jpa;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

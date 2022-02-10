@@ -1,4 +1,4 @@
-package es.miguelgsi.springboottestingprimer;
+package es.miguelgsi.springboottestingprimer.infrastructure.adapters.in.rest;
 
 import lombok.Builder;
 import lombok.Data;

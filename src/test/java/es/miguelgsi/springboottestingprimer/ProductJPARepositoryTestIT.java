@@ -1,5 +1,8 @@
 package es.miguelgsi.springboottestingprimer;
 
+import es.miguelgsi.springboottestingprimer.infrastructure.adapters.out.jpa.PriceJPA;
+import es.miguelgsi.springboottestingprimer.infrastructure.adapters.out.jpa.ProductJPA;
+import es.miguelgsi.springboottestingprimer.infrastructure.adapters.out.jpa.ProductJPARepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

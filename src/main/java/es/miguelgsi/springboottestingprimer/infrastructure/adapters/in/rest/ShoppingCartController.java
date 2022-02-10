@@ -1,5 +1,11 @@
-package es.miguelgsi.springboottestingprimer;
+package es.miguelgsi.springboottestingprimer.infrastructure.adapters.in.rest;
 
+import es.miguelgsi.springboottestingprimer.application.ports.in.ShoppingCartUseCase;
+import es.miguelgsi.springboottestingprimer.domain.entities.Price;
+import es.miguelgsi.springboottestingprimer.domain.entities.Purchase;
+import es.miguelgsi.springboottestingprimer.domain.values.ArticleId;
+import es.miguelgsi.springboottestingprimer.domain.values.Currency;
+import es.miguelgsi.springboottestingprimer.domain.values.SaleId;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -24,7 +30,7 @@ public class ShoppingCartController {
 
     @GetMapping("/v1/shopping-cart/{articleId}/price")
     public ResponseEntity<ShoppingCartPriceDTO> price(@PathVariable Long articleId,
-            @RequestParam(required = false, defaultValue = "EURO") Currency currency) {
+                                                      @RequestParam(required = false, defaultValue = "EURO") Currency currency) {
         Price price = shoppingCartUseCase.price(new ArticleId(articleId), currency);
         return ResponseEntity.ok(ShoppingCartPriceDTO.builder()
                 .currency(price.getCurrency().name())

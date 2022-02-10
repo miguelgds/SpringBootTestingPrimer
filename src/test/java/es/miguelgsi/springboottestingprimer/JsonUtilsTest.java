@@ -1,6 +1,7 @@
 package es.miguelgsi.springboottestingprimer;
 
 import com.jayway.jsonpath.JsonPath;
+import es.miguelgsi.springboottestingprimer.infrastructure.adapters.in.rest.PaymentResponse;
 import org.json.JSONException;
 import org.junit.jupiter.api.Test;
 import org.skyscreamer.jsonassert.JSONAssert;

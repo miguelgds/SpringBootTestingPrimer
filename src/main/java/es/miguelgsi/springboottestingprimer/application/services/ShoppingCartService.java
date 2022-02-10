@@ -1,5 +1,13 @@
-package es.miguelgsi.springboottestingprimer;
+package es.miguelgsi.springboottestingprimer.application.services;
 
+import es.miguelgsi.springboottestingprimer.domain.entities.Price;
+import es.miguelgsi.springboottestingprimer.domain.entities.Purchase;
+import es.miguelgsi.springboottestingprimer.application.ports.out.DiscountRepository;
+import es.miguelgsi.springboottestingprimer.application.ports.out.ProductRepository;
+import es.miguelgsi.springboottestingprimer.application.ports.in.ShoppingCartUseCase;
+import es.miguelgsi.springboottestingprimer.domain.values.ArticleId;
+import es.miguelgsi.springboottestingprimer.domain.values.Currency;
+import es.miguelgsi.springboottestingprimer.domain.values.SaleId;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

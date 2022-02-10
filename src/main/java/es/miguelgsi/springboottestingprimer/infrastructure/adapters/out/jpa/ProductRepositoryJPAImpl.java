@@ -1,10 +1,13 @@
-package es.miguelgsi.springboottestingprimer;
+package es.miguelgsi.springboottestingprimer.infrastructure.adapters.out.jpa;
 
+import es.miguelgsi.springboottestingprimer.domain.entities.Purchase;
+import es.miguelgsi.springboottestingprimer.infrastructure.adapters.in.rest.ResourceNotFoundException;
+import es.miguelgsi.springboottestingprimer.application.ports.out.ProductRepository;
+import es.miguelgsi.springboottestingprimer.domain.values.SaleId;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
