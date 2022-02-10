@@ -1,10 +1,9 @@
 package es.miguelgsi.springboottestingprimer.application.services;
 
-import es.miguelgsi.springboottestingprimer.domain.entities.Price;
-import es.miguelgsi.springboottestingprimer.domain.entities.Purchase;
 import es.miguelgsi.springboottestingprimer.application.ports.out.DiscountRepository;
 import es.miguelgsi.springboottestingprimer.application.ports.out.ProductRepository;
-import es.miguelgsi.springboottestingprimer.application.services.ShoppingCartService;
+import es.miguelgsi.springboottestingprimer.domain.entities.Price;
+import es.miguelgsi.springboottestingprimer.domain.entities.Purchase;
 import es.miguelgsi.springboottestingprimer.domain.values.ArticleId;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

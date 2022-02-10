@@ -1,11 +1,9 @@
-package es.miguelgsi.springboottestingprimer.infrastructure.adapters.in;
+package es.miguelgsi.springboottestingprimer.infrastructure.adapters.in.rest;
 
 import es.miguelgsi.springboottestingprimer.FixedClockConfig;
-import es.miguelgsi.springboottestingprimer.infrastructure.adapters.in.rest.ShoppingCartController;
+import es.miguelgsi.springboottestingprimer.application.ports.in.ShoppingCartUseCase;
 import es.miguelgsi.springboottestingprimer.domain.entities.Price;
 import es.miguelgsi.springboottestingprimer.domain.entities.Purchase;
-import es.miguelgsi.springboottestingprimer.infrastructure.adapters.in.rest.ResourceNotFoundException;
-import es.miguelgsi.springboottestingprimer.application.ports.in.ShoppingCartUseCase;
 import es.miguelgsi.springboottestingprimer.domain.values.ArticleId;
 import es.miguelgsi.springboottestingprimer.domain.values.SaleId;
 import org.junit.jupiter.api.DisplayName;
@@ -31,10 +29,10 @@ import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(ShoppingCartController.class)

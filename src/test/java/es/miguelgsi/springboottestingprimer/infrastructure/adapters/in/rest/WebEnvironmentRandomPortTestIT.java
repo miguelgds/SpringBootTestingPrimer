@@ -1,6 +1,5 @@
 package es.miguelgsi.springboottestingprimer.infrastructure.adapters.in.rest;
 
-import org.assertj.core.api.Assertions;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
