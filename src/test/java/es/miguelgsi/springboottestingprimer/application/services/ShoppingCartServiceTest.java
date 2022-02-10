@@ -1,4 +1,4 @@
-package es.miguelgsi.springboottestingprimer;
+package es.miguelgsi.springboottestingprimer.application.services;
 
 import es.miguelgsi.springboottestingprimer.domain.entities.Price;
 import es.miguelgsi.springboottestingprimer.domain.entities.Purchase;

@@ -1,5 +1,6 @@
-package es.miguelgsi.springboottestingprimer;
+package es.miguelgsi.springboottestingprimer.infrastructure.adapters.in;
 
+import es.miguelgsi.springboottestingprimer.FixedClockConfig;
 import es.miguelgsi.springboottestingprimer.infrastructure.adapters.in.rest.ShoppingCartController;
 import es.miguelgsi.springboottestingprimer.domain.entities.Price;
 import es.miguelgsi.springboottestingprimer.domain.entities.Purchase;

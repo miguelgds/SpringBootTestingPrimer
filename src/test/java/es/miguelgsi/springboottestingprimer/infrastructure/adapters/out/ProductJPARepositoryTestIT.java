@@ -1,4 +1,4 @@
-package es.miguelgsi.springboottestingprimer;
+package es.miguelgsi.springboottestingprimer.infrastructure.adapters.out;
 
 import es.miguelgsi.springboottestingprimer.infrastructure.adapters.out.jpa.PriceJPA;
 import es.miguelgsi.springboottestingprimer.infrastructure.adapters.out.jpa.ProductJPA;

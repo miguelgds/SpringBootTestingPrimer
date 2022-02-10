@@ -1,4 +1,4 @@
-package es.miguelgsi.springboottestingprimer;
+package es.miguelgsi.springboottestingprimer.infrastructure.adapters.in.rest;
 
 import org.assertj.core.api.Assertions;
 import org.hamcrest.MatcherAssert;
