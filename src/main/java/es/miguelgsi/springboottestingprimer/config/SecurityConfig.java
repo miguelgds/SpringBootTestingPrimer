@@ -24,6 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers(HttpMethod.GET, "/v1/shopping-cart/*/price").permitAll()
                 .mvcMatchers("/**").authenticated())
             .httpBasic();
+
+        http.csrf().disable();
     }
 
     @Bean
